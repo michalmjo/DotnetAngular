@@ -1,4 +1,4 @@
-﻿// to jest importowanie App User z API.ENtities uzera do naszego DbSet<Appuser>
+﻿// to jest importowanie App User z API.ENtities usera do naszego DbSet<Appuser>
 using API.Entities;
 
 using Microsoft.EntityFrameworkCore;

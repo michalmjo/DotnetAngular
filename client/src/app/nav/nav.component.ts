@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../services/account.service';
 import { Observable, of } from 'rxjs';
 import { User } from '../models/user';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav',
@@ -14,7 +16,11 @@ export class NavComponent implements OnInit {
 
   // currentUser$: Observable<User | null> = of(null);
 
-  constructor(public accountService: AccountService) {}
+  constructor(
+    public accountService: AccountService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     // this.currentUser$ = this.accountService.currentUser$;
@@ -41,19 +47,17 @@ export class NavComponent implements OnInit {
 
   login() {
     const userModel = this.authForm.value.userDataGroup;
-    const username = this.authForm.get('userDataGroup.username')?.value;
-    const password = this.authForm.get('userDataGroup.password')?.value;
-    console.log(this.authForm.value.userDataGroup);
-    console.log(username);
-    console.log(password);
+
     this.accountService.login(userModel).subscribe(
       (res) => {
         console.log(res);
+        this.router.navigateByUrl('/members');
       },
-      (error) => console.log(error)
+      (error) => this.toastr.error(error.error)
     );
   }
   logOut() {
     this.accountService.logout();
+    this.router.navigateByUrl('/');
   }
 }

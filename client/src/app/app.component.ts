@@ -4,6 +4,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { AccountService } from './services/account.service';
 import { User } from './models/user';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit {
   error: any;
   serverMessage?: string;
   title = 'client';
+  currentApplicationVersion = environment.appVersion;
 
   constructor(
     private http: HttpClient,

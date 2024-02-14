@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../services/account.service';
 import { error } from 'console';
 import { Observer } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,10 @@ export class RegisterComponent implements OnInit {
   model: any = {};
   authForm!: FormGroup;
 
-  constructor(private accountService: AccountService) {}
+  constructor(
+    private accountService: AccountService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.authForm = new FormGroup({
@@ -38,7 +42,7 @@ export class RegisterComponent implements OnInit {
         console.log(res);
         this.cancel();
       },
-      error: (error) => console.log(error),
+      error: (error) => this.toastr.error(error.error),
       complete: () => {}, // Możesz dodać logikę, jeśli potrzebujesz obsługi zdarzenia complete
     };
 

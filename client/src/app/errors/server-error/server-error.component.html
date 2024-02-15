@@ -1,0 +1,18 @@
+<h3>Internal server error - refresign the page will make the error disapper</h3>
+<ng-container *ngIf="error">
+  <h4 class="text-danger">Error: {{ error.message }}</h4>
+  <p class="font-weight-bold">
+    Note: If you are seeing this then angular is prbably not to blame
+  </p>
+
+  <ol>
+    <li>
+      Open chrome dev tools ! Then chceck the gailing request in teh netwoerk
+      tab
+    </li>
+  </ol>
+  <p>Folowing is the stack trace - the frst fer lines will tell you....</p>
+  <code class="mt-5">
+    {{ error.details }}
+  </code>
+</ng-container>
